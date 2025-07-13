@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vite App</title>
+</head>
+<body x-data>
+<nav class="left">
+    <a>
+        <i>home</i>
+        <div>Home</div>
+    </a>
+    <a>
+        <i>search</i>
+        <div>Search</div>
+    </a>
+    <a>
+        <i>share</i>
+        <div>share</div>
+    </a>
+</nav>
+<main class="responsive">
+    <h3>Storage Calculator</h3>
+    <article>
+        <fieldset>
+            <legend>Fill all fields</legend>
+            <div class="row">
+                <div class="max">
+                    <div class="field border label">
+                        <input type="number" x-model="$store.data.value"/>
+                        <label>Storage generated</label>
+                    </div>
+                </div>
+                <div class="max">
+                    <div class="field border label">
+                        <select x-model="$store.data.storeUnit">
+                            <option value="kb">Kilobytes</option>
+                            <option value="mb">Megabytes</option>
+                            <option value="gb">Gigabytes</option>
+                        </select>
+                        <label>Store units</label>
+                    </div>
+                </div>
+                <div class="max">
+                    <div class="field border label">
+                        <select x-model="$store.data.perTimeUnit">
+                            <option value="seconds">Per Second</option>
+                            <option value="minutes">Per Minute</option>
+                            <option value="hours">Per Hour</option>
+                            <option value="days">Per Day</option>
+                            <option value="months">Per Month</option>
+                            <option value="years">Per Year</option>
+                        </select>
+                        <label>In time</label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </article>
+
+    <article>
+        <div class="row">
+            <div class="max">
+                <table class="border">
+                    <thead>
+                    <tr>
+                        <th>Period</th>
+                        <th>Base 1000</th>
+                        <th>Base 1024</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <template x-for='item in $store.data.calculateStore()'>
+                        <tr>
+                            <td x-text="item[0]"></td>
+                            <td x-text="item[1]"></td>
+                            <td x-text="item[2]"></td>
+                        </tr>
+                    </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </article>
+    <article>
+        <div class="max">
+            <table class="border">
+                <thead>
+                <tr>
+                    <th>AWS</th>
+                    <th>Day Price</th>
+                    <th>Month Price</th>
+                    <th>Year Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <template x-for='(value,key) in $store.data.awsPrices'>
+                            <tr>
+                                <td x-text="key"></td>
+                                <td x-text="value[0]"></td>
+                                <td x-text="value[1]"></td>
+                                <td x-text="value[2]"></td>
+                            </tr>
+                </template>
+                </tbody>
+            </table>
+        </div>
+    </article>
+</main>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
