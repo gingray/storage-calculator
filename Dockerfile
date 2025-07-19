@@ -7,7 +7,7 @@
 # You can find the appropriate image on Docker Hub: https://hub.docker.com/_/node
 # In this example, we're using node:20-alpine3.20
 # run in termilnal commande line "node --version to get the version of your app"
-FROM node:20-alpine3.20 As build
+FROM node:20-alpine3.20 as build
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
@@ -32,7 +32,7 @@ RUN npm run build
 FROM nginx:stable-alpine as production
 
 # copy nginx configuration in side conf.d folder
-COPY --from=build /usr/src/app/nginx /etc/nginx/conf.d
+#COPY --from=build /usr/src/app/nginx /etc/nginx/conf.d
 
 # Copy the build output from the dist folder into the Nginx html directory
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
