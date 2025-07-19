@@ -68,7 +68,7 @@ const scaleTime = (value, converter1000, converter1024) => {
 
 document.addEventListener('alpine:init', () => {
     Alpine.store('data', {
-        value: 0,
+        value: null,
         storeUnit: 'kb',
         perTimeUnit: 'seconds',
         awsPrices: {},
