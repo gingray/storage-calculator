@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Vite App</title>
+    <title>System Design Calculator</title>
 </head>
 <body x-data>
 <nav class="left">
@@ -16,88 +16,155 @@
 <main class="responsive">
     <h1>System Design Calculator</h1>
     <article>
-        <fieldset>
-            <legend>Fill all fields</legend>
-            <div class="row">
-                <div class="max">
-                    <div class="field border label">
-                        <input type="number" x-model="$store.data.value"/>
-                        <label>Storage generated</label>
-                    </div>
-                </div>
-                <div class="max">
-                    <div class="field border label">
-                        <select x-model="$store.data.storeUnit">
-                            <option value="kb">Kilobytes</option>
-                            <option value="mb">Megabytes</option>
-                            <option value="gb">Gigabytes</option>
-                        </select>
-                        <label>Store units</label>
-                    </div>
-                </div>
-                <div class="max">
-                    <div class="field border label">
-                        <select x-model="$store.data.perTimeUnit">
-                            <option value="seconds">Per Second</option>
-                            <option value="minutes">Per Minute</option>
-                            <option value="hours">Per Hour</option>
-                            <option value="days">Per Day</option>
-                            <option value="months">Per Month</option>
-                            <option value="years">Per Year</option>
-                        </select>
-                        <label>In time</label>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-    </article>
-
-    <article>
-        <div class="row">
-            <div class="max">
-                <table class="border">
-                    <thead>
-                    <tr>
-                        <th>Period</th>
-                        <th>Assume 1kb ~ 1000B</th>
-                        <th>Assume 1kb = 1024B</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <template x-for='item in $store.data.calculateStore()'>
-                        <tr>
-                            <td x-text="item[0]"></td>
-                            <td x-text="item[1]"></td>
-                            <td x-text="item[2]"></td>
-                        </tr>
-                    </template>
-                    </tbody>
-                </table>
-            </div>
+        <div class="tabs">
+            <a :class="$store.ui.currentTab == 'storage' ? 'active' : ''" x-on:click="$store.ui.setTab('storage')">Storage</a>
+            <a :class="$store.ui.currentTab == 'users' ? 'active' : ''" x-on:click="$store.ui.setTab('users')">Users</a>
         </div>
-    </article>
-    <article>
-        <div class="max">
-            <table class="border">
-                <thead>
-                <tr>
-                    <th>AWS</th>
-                    <th>Day Price</th>
-                    <th>Month Price</th>
-                    <th>Year Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <template x-for='(value,key) in $store.data.awsPrices'>
+        <div :class="$store.ui.currentTab == 'storage' ? 'active' : ''" class="page padding">
+            <div>
+                <fieldset>
+                    <legend>Fill storage fields</legend>
+                    <div class="row">
+                        <div class="max">
+                            <div class="field border label">
+                                <input type="number" x-model="$store.data.value"/>
+                                <label>Storage generated</label>
+                            </div>
+                        </div>
+                        <div class="max">
+                            <div class="field border label">
+                                <select x-model="$store.data.storeUnit">
+                                    <option value="kb">Kilobytes</option>
+                                    <option value="mb">Megabytes</option>
+                                    <option value="gb">Gigabytes</option>
+                                </select>
+                                <label>Store units</label>
+                            </div>
+                        </div>
+                        <div class="max">
+                            <div class="field border label">
+                                <select x-model="$store.data.perTimeUnit">
+                                    <option value="seconds">Per Second</option>
+                                    <option value="minutes">Per Minute</option>
+                                    <option value="hours">Per Hour</option>
+                                    <option value="days">Per Day</option>
+                                    <option value="months">Per Month</option>
+                                    <option value="years">Per Year</option>
+                                </select>
+                                <label>In time</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div>
+                <div class="row">
+                    <div class="max">
+                        <table class="border">
+                            <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Assume 1kb ~ 1000B</th>
+                                <th>Assume 1kb = 1024B</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <template x-for='item in $store.data.calculateStore()'>
+                                <tr>
+                                    <td x-text="item[0]"></td>
+                                    <td x-text="item[1]"></td>
+                                    <td x-text="item[2]"></td>
+                                </tr>
+                            </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="max">
+                    <table class="border">
+                        <thead>
+                        <tr>
+                            <th>AWS</th>
+                            <th>Day Price</th>
+                            <th>Month Price</th>
+                            <th>Year Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <template x-for='(value,key) in $store.data.awsPrices'>
                             <tr>
                                 <td x-text="key"></td>
                                 <td x-text="value[0]"></td>
                                 <td x-text="value[1]"></td>
                                 <td x-text="value[2]"></td>
                             </tr>
-                </template>
-                </tbody>
-            </table>
+                        </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div :class="$store.ui.currentTab == 'users' ? 'active' : ''" class="page padding">
+            <div>
+                <fieldset>
+                    <legend>Fill users fields</legend>
+                    <div class="row">
+                        <div class="max">
+                            <div class="field border label">
+                                <input type="number" x-model="$store.users.usersAmount"/>
+                                <label>Expected Users</label>
+                            </div>
+                        </div>
+                        <div class="max">
+                            <div class="field border label">
+                                <select x-model="$store.users.usersAmountUnit">
+                                    <option value="DAU">DAU</option>
+                                    <option value="MAU">MAU</option>
+                                </select>
+                                <label>Store units</label>
+                            </div>
+                        </div>
+                        <div class="max">
+                            <div class="field border label">
+                                <input type="number" x-model="$store.users.requestPerUser"/>
+                                <label>AVG. Requests per user</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div>
+                <fieldset>
+                    <legend>Fill users fields</legend>
+                    <div class="row">
+                        <div class="max">
+                            <div class="field border label">
+                                <input type="number" x-model="$store.users.requestSize"/>
+                                <label>AVG request payload size</label>
+                            </div>
+                        </div>
+                        <div class="max">
+                            <div class="field border label">
+                                <select x-model="$store.users.usersAmountUnit">
+                                    <option value="kb">Kilobytes</option>
+                                    <option value="mb">Megabytes</option>
+                                    <option value="gb">Gigabytes</option>
+                                </select>
+                                <label>Store units</label>
+                            </div>
+                        </div>
+                        <div class="max">
+                            <div class="field border label">
+                                <input type="number" x-model="$store.users.requestPerUser"/>
+                                <label>AVG. Requests per user</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
         </div>
     </article>
 </main>
