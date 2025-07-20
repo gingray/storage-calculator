@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>System Design Calculator</title>
+</head>
+<body x-data>
+<nav class="left">
+    <a href="/">
+        <i>home</i>
+        <div>Home</div>
+    </a>
+    <a href="/check-list">
+        <i>list</i>
+        <div>Check List</div>
+    </a>
+
+</nav>
+<main class="responsive">
+    <h1>System Design Check List</h1>
+    <article>
+        <div class="section">
+            <h2>1. 🌍 User Assumptions</h2>
+            <ul>
+                <li><strong>Total Users:</strong></li>
+                <li><strong>Daily Active Users (DAU):</strong></li>
+                <li><strong>Peak Concurrent Users:</strong></li>
+                <li><strong>Average Session Duration:</strong></li>
+                <li><strong>Actions per User per Day:</strong></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>2. 🔁 Traffic Estimation</h2>
+            <ul>
+                <li><strong>Requests per User per Day:</strong></li>
+                <li><strong>Total Daily Requests:</strong></li>
+                <li><strong>Average RPS:</strong></li>
+                <li><strong>Peak RPS Estimate:</strong></li>
+                <li><strong>Avg Payload Size (KB):</strong></li>
+                <li><strong>Bandwidth In/Out per Day:</strong></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>3. 💾 Storage Estimation</h2>
+            <ul>
+                <li><strong>Data per User per Day:</strong></li>
+                <li><strong>Daily Total Data Written:</strong></li>
+                <li><strong>Retention Period:</strong></li>
+                <li><strong>Total Storage Needed:</strong></li>
+                <li><strong>Index Overhead Estimate:</strong></li>
+                <li><strong>Replication Factor:</strong></li>
+                <li><strong>Final Storage with Replication:</strong></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>4. 📚 Read/Write Patterns</h2>
+            <ul>
+                <li><strong>Read QPS:</strong></li>
+                <li><strong>Write QPS:</strong></li>
+                <li><strong>Read:Write Ratio:</strong></li>
+                <li><strong>Type of Reads:</strong></li>
+                <li><strong>Write Frequency / Criticality:</strong></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>5. ⚙️ Backend Compute Estimation</h2>
+            <ul>
+                <li><strong>Estimated CPU per Request:</strong></li>
+                <li><strong>Memory per Request:</strong></li>
+                <li><strong># of Instances Needed:</strong></li>
+                <li><strong>Batch/Async Job Load:</strong></li>
+                <li><strong>Throughput of Worker Jobs:</strong></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>6. 🕓 Latency Targets</h2>
+            <ul>
+                <li><strong>P95 Target Latency:</strong></li>
+                <li><strong>P99 Target Latency:</strong></li>
+                <li><strong>Timeout Budgets:</strong></li>
+                <li><strong>Cold Start/Init Time:</strong></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>7. 📦 Caching Strategy</h2>
+            <ul>
+                <li><strong>Cache Types:</strong></li>
+                <li><strong>Avg Cache Hit Ratio:</strong></li>
+                <li><strong>Origin Load (uncached reqs):</strong></li>
+                <li><strong>Eviction Policy / TTLs:</strong></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>8. 🔐 Security and Limits</h2>
+            <ul>
+                <li><strong>Auth Type:</strong></li>
+                <li><strong>Rate Limit per User/IP:</strong></li>
+                <li><strong>Token Size and Auth Storage:</strong></li>
+                <li><strong>Data Sensitivity:</strong></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>9. 🔄 Replication & Availability</h2>
+            <ul>
+                <li><strong>Replication Strategy:</strong></li>
+                <li><strong>Failover Time Goal:</strong></li>
+                <li><strong>Consistency Model:</strong></li>
+                <li><strong>Expected Downtime Tolerance:</strong></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>10. 📊 Monitoring & Metrics</h2>
+            <ul>
+                <li><strong>Throughput per Component:</strong></li>
+                <li><strong>Error Rate Budget:</strong></li>
+                <li><strong>CPU / Mem / Disk usage monitoring:</strong></li>
+                <li><strong>Alerting Rules & Thresholds:</strong></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🧪 Summary Table</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Area</th>
+                    <th>Metric</th>
+                    <th>Estimation/Notes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr><td>Users</td><td>DAU, MAU</td><td></td></tr>
+                <tr><td>Traffic</td><td>RPS, Peak RPS, Payload Size</td><td></td></tr>
+                <tr><td>Storage</td><td>Per User, Retention, Replicas</td><td></td></tr>
+                <tr><td>Read/Write</td><td>QPS, Ratio</td><td></td></tr>
+                <tr><td>Compute</td><td>CPU/Req, Instance Count</td><td></td></tr>
+                <tr><td>Latency</td><td>P95, P99, Timeout</td><td></td></tr>
+                <tr><td>Cache</td><td>Hit Ratio, TTL</td><td></td></tr>
+                <tr><td>Availability</td><td>RF, Downtime Tolerance</td><td></td></tr>
+                <tr><td>Monitoring</td><td>Errors, Alerts, Saturation</td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+</main>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
