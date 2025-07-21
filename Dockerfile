@@ -36,6 +36,7 @@ FROM nginx:stable-alpine as production
 
 # Copy the build output from the dist folder into the Nginx html directory
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80 to allow access to the app
 EXPOSE 80
